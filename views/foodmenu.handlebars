@@ -1,0 +1,165 @@
+
+  
+    <div class="container">
+        <hr>
+        <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+        <h2>Food Items</h2>
+        <span class="clearfix"></span>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr><!-- Table headings -->
+                    <th>Index</th>
+                    <th>Meal</th>
+                    <th>Descripton</th>
+                    <th>Calories</th>
+                    <th>Price</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="meal in meals">
+                    <td>1</td>
+                    <td>Fish & Chips</td>
+                    <td>Fresh Fish served with chips</td>
+                    <td>780</td>
+                    <td>€7.80</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectMeal(meal)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete" ng-click="selectMeal(meal)">Delete</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Add-->
+    <div class="modal fade" id="myModalAdd" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Meal</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Meal:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newMeal.meal">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Desc:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newMeal.description">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Calories:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newMeal.calories">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Price:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newMeal.price">
+                            </div>
+                        </div>
+
+                        
+                        <button type="submit" class="btn btn-default" ng-click="saveMeal()" data-dismiss="modal">Save</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Edit-->
+    <div class="modal fade" id="myModalEdit" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Meal</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="clearfix"></span>
+                    <hr>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Meal:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedMeal.meal">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Desc:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedMeal.description">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Calories:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedMeal.calories">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Price:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedMeal.price">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="updateMeal()" data-dismiss="modal">Save</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete-->
+    <div class="modal fade" id="myModalDelete" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Are you sure ?</h4>
+                </div>
+                <div class="modal-body">
+                    <strong style="color: red">
+                    You are going to delete {{clickedMeal.meal}}
+                    </strong>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >No</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteMeal()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    

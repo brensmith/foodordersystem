@@ -1,0 +1,79 @@
+
+
+<h2 class="page-header">Menu</h2>
+
+    <div ng-controller="cartController">
+
+
+      <div class="row">
+          <div ng-repeat="fooditem in fooditems">
+
+              <div class="col-lg-3 col-sm-4 col-xs-6"><a title="{{fooditem.name}}" href="/#/">
+                <h4>{{fooditem.name}}, €{{fooditem.price}}</h4>
+
+                  <img class="thumbnail img-responsive" src="{{fooditem.img_url}}"></a>
+                  <ngcart-addtocart id="{{fooditem._id}}" name="{{fooditem.name}}" price="{{fooditem.price}}" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+    
+
+
+    <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <h3 class="modal-title">title</h3>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Details</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Add</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.thumbnail').click(function () {
+                $('.modal-body').empty();
+                var title = $(this).parent('a').attr("title");
+                $('.modal-title').html(title);
+                $($(this).parents('div').html()).appendTo('.modal-body');
+                $('#myModal').modal({show: true});
+            });
+        });
+    </script>
+
+    <script type="text/ng-template" id="template/ngCart/addtocart.html">
+<div ng-hide="attrs.id">
+  <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+</div>
+<div ng-show="attrs.id">
+  <div>
+    <span ng-show="quantityMax">
+      <select name="quantity" id="quantity" ng-model="q" ng-options=" v for v in qtyOpt"></select>
+    </span>
+      <a class="btn btn-sm btn-primary" ng-click="ngCart.addItem(id, name, price, q, data)" ng-transclude></a>
+  </div>
+  <!--
+  <span ng-show="inCart()">
+  <br>
+  <p class="alert alert-info">This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a></p>
+  </span>
+  -->
+</div>
+</script>
+<hr>
+
+

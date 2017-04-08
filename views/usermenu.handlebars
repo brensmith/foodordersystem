@@ -1,0 +1,168 @@
+<div class="container">
+        <hr>
+        <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+        <h2>All Users</h2>
+        <span class="clearfix"></span>
+        <hr>
+
+<div class="alert alert-info" ng-if="message">
+<a href="#" class="close" data-dismiss="alert" ng-click="clearMessage()">&times;</a>
+    {{message}}
+  </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr><!-- Table headings -->
+                    <th>Index</th>
+                    <th>Username</th>
+                    <th>Full name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>1</td>
+                    <td>OB ONE </td>
+                    <td>Tim kelly</td>
+                    <td>sk@gmail.com</td>
+                    <td>QWERTY</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectUser(user)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete" ng-click="selectUser(user)">Delete</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Add-->
+    <div class="modal fade" id="myModalAdd" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add User</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Username:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newUser.username">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Full Name:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newUser.fullName">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Email:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newUser.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Password:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newUser.password">
+                            </div>
+                        </div>
+
+                        
+                        <button type="submit" class="btn btn-default" ng-click="saveUser()" data-dismiss="modal">Save</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Edit-->
+    <div class="modal fade" id="myModalEdit" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit User</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="clearfix"></span>
+                    <hr>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Username:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedUser.username">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Email:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedUser.email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Full Name:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedUser.fullName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Password:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedUser.password">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="updateUser()" data-dismiss="modal">Save</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete-->
+    <div class="modal fade" id="myModalDelete" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Are you sure ?</h4>
+                </div>
+                <div class="modal-body">
+                    <strong style="color: red">
+                    You are going to delete {{clickedUser.fullName}}
+                    </strong>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >No</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteUser()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>

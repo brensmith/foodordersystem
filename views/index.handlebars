@@ -1,0 +1,106 @@
+ <!DOCTYPE html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- Custom CSS -->
+    <link href="public/css/thumbnail-gallery.css" rel="stylesheet">
+
+
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .modal-dialog {width:400px;}
+.thumbnail {margin-bottom:6px;}
+    </style>
+    
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+    
+    <!-- Page Content -->
+    <div class="container">
+
+    <h2 class="page-header">Menu</h2>
+        <p>Click to select an item from the menu</p>  
+    <div class="row">
+   
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Beef Burger & Chips: €5.50" href="#"><img class="thumbnail img-responsive" src="images/burger.jpg"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Fish & Chips €7.00" href="#"><img class="thumbnail img-responsive" src="images/fishnchips.jpg"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Pizza 9 inch €7.00" href="#"><img class="thumbnail img-responsive" src="images/pizza.jpg"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Fresh Susi €8.00" href="#"><img class="thumbnail img-responsive" src="images/susi.jpg"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 5" href="#"><img class="thumbnail img-responsive" src="images/992233.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 6" href="#"><img class="thumbnail img-responsive" src="images/FFF.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 8" href="#"><img class="thumbnail img-responsive" src="images/777.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 9" href="#"><img class="thumbnail img-responsive" src="images/992233.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 10" href="#"><img class="thumbnail img-responsive" src="images/EEE.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 11" href="#"><img class="thumbnail img-responsive" src="images/FFF.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 12" href="#"><img class="thumbnail img-responsive" src="images/DDD.png"></a></div>
+      <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 13" href="#"><img class="thumbnail img-responsive" src="images/992233.png"></a></div>
+   
+    <hr>
+    
+    <hr>
+    </div>
+  </div>
+</div>
+<div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">×</button>
+        <h3 class="modal-title">title</h3>
+    </div>
+    <div class="modal-body">
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" >Details</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" >Add</button>
+    
+    </div>
+   </div>
+  </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('.thumbnail').click(function(){
+      $('.modal-body').empty();
+    var title = $(this).parent('a').attr("title");
+    $('.modal-title').html(title);
+    $($(this).parents('div').html()).appendTo('.modal-body');
+    $('#myModal').modal({show:true});
+});
+});
+</script>
+        <hr>
+
+        
+
+    </div>
+    <!-- /.container -->
+
+    
+</body>
+
+</html>
+
+
+
+

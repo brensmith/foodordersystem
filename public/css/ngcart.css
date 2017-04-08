@@ -1,0 +1,41 @@
+body {
+    padding-top: 50px;
+
+pre {
+    padding: 25px;
+}
+table td{
+    font-size: 14px;
+}
+table tfoot td{
+    font-weight: bold;
+}
+.navbar-fixed-top ul.navbar-nav li a {
+    padding-bottom: 14px;
+}
+
+.main {
+    padding: 40px 15px;
+}
+
+
+}.thumbnail p{
+     height:63px;
+    overflow: hidden;
+    font-size: 12px;
+
+}
+.thumbnail .price{
+    color:#3a1;
+}
+.thumbnail h3 {
+    height: 50px;
+}
+.nav path {
+    fill:#fff
+}
+
+code.block {
+    padding: 20px;
+    display: block;
+}

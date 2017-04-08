@@ -1,0 +1,185 @@
+
+        <hr>
+        <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+        <h2>Food Menu</h2>
+        <span class="clearfix"></span>
+        <hr>
+
+<div class="alert alert-info" ng-if="message">
+<a href="#" class="close" data-dismiss="alert" ng-click="clearMessage()">&times;</a>
+    {{message}}
+  </div>
+
+        
+        <table class="table table-striped header-fixed">
+            <thead>
+                <tr><!-- Table headings -->
+                    <th>Index</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Calories</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fooditem in fooditems">
+                    <td>{{$index+1}}.</td>
+                    <td>{{fooditem.name}}</td>
+                    <td>{{fooditem.description}}</td>
+                    <td>{{fooditem.calories}}</td>
+                    <td>{{fooditem.price}}</td>
+                    <td>{{fooditem.img_url}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectFooditem(fooditem)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete" ng-click="selectFooditem(fooditem)">Delete</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Add-->
+    <div class="modal fade" id="myModalAdd" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Meal</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Name:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newFooditem.name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Desc:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newFooditem.description">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Calories:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newFooditem.calories">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Price:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newFooditem.price">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Image:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="newFooditem.img_url">
+                            </div>
+                        </div>
+
+                        
+                        <button type="submit" class="btn btn-default" ng-click="saveFooditem()" data-dismiss="modal">Save</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Edit-->
+    <div class="modal fade" id="myModalEdit" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Meal</h4>
+                </div>
+                <div class="modal-body">
+                    <span class="clearfix"></span>
+                    <hr>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Name:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedFooditem.name">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Desc:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedFooditem.description">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Calories:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedFooditem.calories">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Price:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedFooditem.price">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-lable col-sm-2">Image:</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="clickedFooditem.img_url">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="updateFooditem()" data-dismiss="modal">Save</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete-->
+    <div class="modal fade" id="myModalDelete" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Are you sure ?</h4>
+                </div>
+                <div class="modal-body">
+                    <strong style="color: red">
+                    You are going to delete {{clickedFooditem.name}}
+                    </strong>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >No</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteFooditem()">Yes</button>
+                </div>
+            </div>
+        </div>
+   

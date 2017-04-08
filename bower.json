@@ -1,0 +1,24 @@
+{
+  "name": "FoodOrderSystem",
+  "description": "Online Food Order System",
+  "main": "server.js",
+  "authors": [
+    "Brendan Smith"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap-lightbox": "^0.12.0",
+    "ng-dialog": "^1.0.1",
+    "ngCart": "ngcart#^1.0.0",
+    "ui.bootstrap": "^2.5.0"
+  }
+}

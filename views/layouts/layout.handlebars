@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<title>Food fffffOrder System</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.js"></script>
+    <script src="js/FoodApp.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+    
+
+
+    <style type="text/css">
+        .modal-dialog {max-width:400px;}
+.thumbnail {margin-bottom:6px;}
+    </style>
+    
+</head>
+<body ng-app="FoodApp">
+	<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            {{#if user}}
+            <li role="presentation"><a href="/">Dashboard</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/">My Profile</a></li>
+                <li><a href="#">History</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+
+ 
+                
+              </ul>
+            </li>
+              
+              <li role="presentation"><a href="/users/logout">Logout</a></li>
+            {{else}}
+              <li role="presentation"><a href="/users/login">Login</a></li>
+              <li role="presentation"><a href="/users/register">Register</a></li>
+            {{/if}}
+          </ul>
+        </nav>
+        <h3 class="text-muted">Food Order System</h3>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}
+          
+
+          <div class="col-md-offset-2 col-md-8">
+          <div ng-view>
+          </div>
+          </div>
+
+        </div>
+
+        
+      </div>
+
+      <footer class="footer">
+        <p>Online Food Order System &copy; 2017 Brendan Smith.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </body>
+</body>
+</html>

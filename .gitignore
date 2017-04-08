@@ -1,0 +1,8 @@
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+/bower_components
+
+
+
