@@ -75,7 +75,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             transclude: true,
             templateUrl: function(element, attrs) {
                 if ( typeof attrs.templateUrl == 'undefined' ) {
-                    return 'template/ngCart/summary.html';
+                    return 'views/template/ngCart/summary.html';
                 } else {
                     return attrs.templateUrl;
                 }
