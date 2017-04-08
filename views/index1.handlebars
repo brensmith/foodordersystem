@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/ngcart.css" rel="stylesheet">
-    <link href="ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+    <link href="css/ngDialog-theme-default.min.css" rel="stylesheet">
     <link href="css/ngDialog.min.css" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
@@ -18,12 +18,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
-    <script type= text/javascript src="ngCart/dist/ngCart.js"></script>
+    <script type= text/javascript src="js/ngCart.js"></script>
     <script type= text/javascript src="js/ngCart.directives.js"></script>
     <script type= text/javascript src="js/ngCart.fulfilment.js"></script>
     <script type= text/javascript src="js/FoodApp.js"></script>
 
-    <script type= text/javascript src="ng-dialog/js/ngDialog.min.js"></script>
+    <script type= text/javascript src="/js/ngDialog.min.js"></script>
     
     <style type="text/css">
         .modal-dialog {
@@ -91,7 +91,7 @@
                 </li>
             </ul>
                     <li role="presentation"><a href="/users/logout">Logout</a></li>
-                    <li ng-show="authenticated"><span ng-bind="current_user"></span></li>
+                    
                 {{else}}
                     <li role="presentation"><a href="/users/login">Login</a></li>
                     <li role="presentation"><a href="/users/register">Register</a></li>
