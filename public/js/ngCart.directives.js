@@ -22,7 +22,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             transclude: true,
             templateUrl: function(element, attrs) {
                 if ( typeof attrs.templateUrl == 'undefined' ) {
-                    return 'views/addtocart.html';
+                    return 'views/template/ngCart/addtocart.html';
                 } else {
                     return attrs.templateUrl;
                 }
@@ -56,7 +56,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             scope: {},
             templateUrl: function(element, attrs) {
                 if ( typeof attrs.templateUrl == 'undefined' ) {
-                    return 'template/ngCart/cart.html';
+                    return 'views/template/ngCart/cart.html';
                 } else {
                     return attrs.templateUrl;
                 }
