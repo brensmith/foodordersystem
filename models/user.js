@@ -4,17 +4,20 @@ var bcrypt = require('bcryptjs');
 // User Schema
 var UserSchema = mongoose.Schema({
 	username: {
-		type: String,
-		index:true
+		type: String, required: true
+		
 	},
 	password: {
-		type: String
+		type: String, required: true
 	},
 	email: {
-		type: String
+		type: String, required: true
 	},
 	name: {
-		type: String
+		type: String, required: true
+	},
+	role: {
+		type: String, enum: ['USER', 'STAFF'], default: 'USER'
 	}
 });
 
@@ -32,7 +35,25 @@ module.exports.createUser = function(newUser, callback){
 module.exports.getUserByUsername = function(username, callback){
 	var query = {username: username};
 	User.findOne(query, callback);
+	console.log(query);
 }
+
+module.exports.isUserAdmin = function(username, callback)
+  {
+    User.findOne({username: username}, function(err, foundUser)
+    {
+      if(foundUser.roles.indexOf('admin') > -1)
+      {
+        callback(foundUser);
+      }
+      else
+      {
+        callback('0');
+      }
+    });
+  }
+
+
 
 module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
@@ -44,3 +65,4 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     	callback(null, isMatch);
 	});
 }
+

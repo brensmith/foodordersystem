@@ -8,8 +8,6 @@ var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
 
-
-
 //load passport module
 var passport = require('passport');
 //load passport local module and create an instance of strategy
@@ -18,7 +16,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 
-
+//connect to olfos mlab database
 mongoose.connect('mongodb://admin:root@ds151060.mlab.com:51060/olfos');
 var db = mongoose.connection;
 // require files from route folder, no need for .js at the end of the file name
@@ -26,6 +24,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var staff = require('./routes/staff');
+
+
+
+
+
 
 // Init App
 var app = express();
@@ -50,7 +53,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'bower_components')));
-
 
 // Express Session
 app.use(session({
@@ -93,13 +95,29 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 app.use('/staff', staff);
 
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 
 // Set Port
@@ -108,3 +126,5 @@ app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), function() {
   console.log('Server started on port ' + app.get('port'));
 });
+
+//var UserService = require("./models/user.service.js")(FoodApp, User, passport);

@@ -4,7 +4,7 @@ Foodapp.config(function($routeProvider){
 	$routeProvider
 		//the timeline display
 		.when('/', {
-			templateUrl: 'views/home.html',
+			templateUrl: 'views/home/home.html',
 			controller: 'mainController'
 		})
 		//the login display
@@ -14,23 +14,29 @@ Foodapp.config(function($routeProvider){
 		})
     //the user profile display
     .when('/userprofile', {
-      templateUrl: 'views/userprofile.html',
+      templateUrl: 'views/user/userprofile.html',
       controller: 'userController',
       action: 'getUser'
     })
+    //the user profile display
+    .when('/dashboard', {
+      templateUrl: 'views/admin/dashboard.html',
+      controller: 'mainController',
+      
+    })
     //the user history display
     .when('/history', {
-      templateUrl: 'views/userhistory.html',
+      templateUrl: 'views/user/userhistory.html',
       controller: 'mainController'
     })
     //the edit menu display
     .when('/editmenu', {
-      templateUrl: 'views/editmenu.html',
+      templateUrl: 'views/admin/editmenu.html',
       controller: 'editmenuController'
     })
     //the edit menu display
     .when('/cart', {
-      templateUrl: 'views/cart.html',
+      templateUrl: 'views/cart/cart.html',
       controller: 'cartController'
     })
 		.otherwise({
@@ -44,6 +50,9 @@ var Foodapp = angular.module('FoodApp');
 
 Foodapp.controller('mainController', ['$scope', '$http', '$location', '$routeParams', 'ngCart', 'ngDialog', function($scope, $http, $location, $routeParams, ngCart, ngDialog){
     console.log('mainController loaded...');
+
+    var customer = {"name": "joe bloggs" , "email": "joebloggs@gmail.com", "contact": "08698765432","order": {"meal": "fish and chips", "drink": "large coke"}, "name": "sue bloggs", "email": "suebloggs@gmail.com", "contact": "08698765432", "order": {"meal": "lasnge and chips", "drink": "large coke"}};
+    $scope.customer = customer;
 
     $scope.clickToOpen = function (index) {
          $scope.selectedItem= $scope.fooditems[index];

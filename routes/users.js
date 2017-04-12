@@ -98,11 +98,10 @@ router.post('/login',
 		failureFlash: true
 	}),
 	function(req, res) {
-		res.redirect('/');
+		res.redirect('/' + req.user.username);
 	});
 
-router.get("/loggedin", function(req, res)
-{
+router.get("/loggedin", function(req, res){
 	res.send(req.isAuthenticated() ? req.user : '0');
 });
 
