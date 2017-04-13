@@ -93,15 +93,16 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                     fulfilmentProvider.setService($scope.service);
                     fulfilmentProvider.setSettings($scope.settings);
                     fulfilmentProvider.checkout()
-                        .success(function (data, status, headers, config) {
+                    .then(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_succeeded', data);
-                        })
-                        .error(function (data, status, headers, config) {
+                        },
+                        function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_failed', {
                                 statusCode: status,
                                 error: data
                             });
-                        });
+                        }
+                    );
                 }
             }]),
             scope: {
@@ -111,7 +112,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             transclude: true,
             templateUrl: function(element, attrs) {
                 if ( typeof attrs.templateUrl == 'undefined' ) {
-                    return 'template/ngCart/checkout.html';
+                    return 'views/template/ngCart/checkout.html';
                 } else {
                     return attrs.templateUrl;
                 }

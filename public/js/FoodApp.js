@@ -51,23 +51,52 @@ var Foodapp = angular.module('FoodApp');
 Foodapp.controller('mainController', ['$scope', '$http', '$location', '$routeParams', 'ngCart', 'ngDialog', function($scope, $http, $location, $routeParams, ngCart, ngDialog){
     console.log('mainController loaded...');
 
+
+
+
+function init() {
+        $scope.newFooditem = {};
+        $scope.clickedFooditem = {};
+        
+
+        $http.get("/fooditem").then(function(response) {
+            $scope.fooditems = response.data;
+            console.log($scope.fooditems);
+
+        });
+
+    }
+
+    init();
+
+
+    $scope.selectFooditem = function(fooditem) {
+            console.log(fooditem);
+            $scope.clickedFooditem = fooditem;
+        };
+
+
     var customer = {"name": "joe bloggs" , "email": "joebloggs@gmail.com", "contact": "08698765432","order": {"meal": "fish and chips", "drink": "large coke"}, "name": "sue bloggs", "email": "suebloggs@gmail.com", "contact": "08698765432", "order": {"meal": "lasnge and chips", "drink": "large coke"}};
     $scope.customer = customer;
 
-    $scope.clickToOpen = function (index) {
-         $scope.selectedItem= $scope.fooditems[index];
-        ngDialog.open({ template: 'views/popupTemp.html', className: 'ngdialog-theme-default' });
-    };
+    
+
+
+
 
     ngCart.setTaxRate(0.0);
     ngCart.setShipping(0.00);   
 
-    $scope.getFoodItem = function(){
-        $http.get('/fooditem').success(function(response){
+    //$scope.getFoodItem = function(){
+        //$http.get('/fooditem').success(function(response){
           //console.log($scope.fooditem);
-            $scope.fooditems = response;
-        });
-    };
+           // $scope.fooditems = response;
+       // });
+   // };
+
+
+    
+    
 
     $scope.getFoodItembyid = function(){
         var id = $routeParams.id;
@@ -99,14 +128,15 @@ Foodapp.controller('mainController', ['$scope', '$http', '$location', '$routePar
         });
     };
 
-    $scope.getFoodItem();
+    //$scope.getFoodItem();
 }]);
 
 Foodapp.controller('cartController',['ngCart', '$log', '$scope', function (ngCart,$log, $scope) {
 
 
+
         $scope.httpSettings = {
-            url:'/checkout'
+            url:'/checkout.html'
         };
 
         $scope.payPalSettings ={ paypal:{

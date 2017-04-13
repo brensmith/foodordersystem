@@ -38,7 +38,7 @@ angular.module('ngCart', ['ngCart.directives'])
             };
         };
 
-        this.addItem = function (id, name, price, quantity, data) {
+        this.addItem = function (id, name, description, calories, price, quantity, data) {
 
             var inCart = this.getItemById(id);
 
@@ -46,7 +46,7 @@ angular.module('ngCart', ['ngCart.directives'])
                 //Update quantity of an item if it's already in the cart
                 inCart.setQuantity(quantity, false);
             } else {
-                var newItem = new ngCartItem(id, name, price, quantity, data);
+                var newItem = new ngCartItem(id, name, description, calories, price, quantity, data);
                 this.$cart.items.push(newItem);
                 $rootScope.$broadcast('ngCart:itemAdded', newItem);
             }
@@ -332,3 +332,180 @@ angular.module('ngCart', ['ngCart.directives'])
     }])
 
     .value('version', '1.0.0');
+;'use strict';
+
+
+angular.module('ngCart.directives', ['ngCart.fulfilment'])
+
+    .controller('CartController',['$scope', 'ngCart', function($scope, ngCart) {
+        $scope.ngCart = ngCart;
+    }])
+
+    .directive('ngcartAddtocart', ['ngCart', function(ngCart){
+        return {
+            restrict : 'E',
+            controller : 'CartController',
+            scope: {
+                id:'@',
+                name:'@',
+                quantity:'@',
+                quantityMax:'@',
+                price:'@',
+                data:'='
+            },
+            transclude: true,
+            templateUrl: function(element, attrs) {
+                if ( typeof attrs.templateUrl == 'undefined' ) {
+                    return 'views/template/ngCart/addtocart.html';
+                } else {
+                    return attrs.templateUrl;
+                }
+            },
+            link:function(scope, element, attrs){
+                scope.attrs = attrs;
+                scope.inCart = function(){
+                    return  ngCart.getItemById(attrs.id);
+                };
+
+                if (scope.inCart()){
+                    scope.q = ngCart.getItemById(attrs.id).getQuantity();
+                } else {
+                    scope.q = parseInt(scope.quantity);
+                }
+
+                scope.qtyOpt =  [];
+                for (var i = 1; i <= scope.quantityMax; i++) {
+                    scope.qtyOpt.push(i);
+                }
+
+            }
+
+        };
+    }])
+
+    .directive('ngcartCart', [function(){
+        return {
+            restrict : 'E',
+            controller : 'CartController',
+            scope: {},
+            templateUrl: function(element, attrs) {
+                if ( typeof attrs.templateUrl == 'undefined' ) {
+                    return 'views/template/ngCart/cart.html';
+                } else {
+                    return attrs.templateUrl;
+                }
+            },
+            link:function(scope, element, attrs){
+
+            }
+        };
+    }])
+
+    .directive('ngcartSummary', [function(){
+        return {
+            restrict : 'E',
+            controller : 'CartController',
+            scope: {},
+            transclude: true,
+            templateUrl: function(element, attrs) {
+                if ( typeof attrs.templateUrl == 'undefined' ) {
+                    return 'views/template/ngCart/summary.html';
+                } else {
+                    return attrs.templateUrl;
+                }
+            }
+        };
+    }])
+
+    .directive('ngcartCheckout', [function(){
+        return {
+            restrict : 'E',
+            controller : ('CartController', ['$rootScope', '$scope', 'ngCart', 'fulfilmentProvider', function($rootScope, $scope, ngCart, fulfilmentProvider) {
+                $scope.ngCart = ngCart;
+
+                $scope.checkout = function () {
+                    fulfilmentProvider.setService($scope.service);
+                    fulfilmentProvider.setSettings($scope.settings);
+                    fulfilmentProvider.checkout()
+                    .then(function (data, status, headers, config) {
+                            $rootScope.$broadcast('ngCart:checkout_succeeded', data);
+                        },
+                        function (data, status, headers, config) {
+                            $rootScope.$broadcast('ngCart:checkout_failed', {
+                                statusCode: status,
+                                error: data
+                            });
+                        }
+                    );
+                }
+            }]),
+            scope: {
+                service:'@',
+                settings:'='
+            },
+            transclude: true,
+            templateUrl: function(element, attrs) {
+                if ( typeof attrs.templateUrl == 'undefined' ) {
+                    return 'views/template/ngCart/checkout.html';
+                } else {
+                    return attrs.templateUrl;
+                }
+            }
+        };
+    }]);
+;
+angular.module('ngCart.fulfilment', [])
+    .service('fulfilmentProvider', ['$injector', function($injector){
+
+        this._obj = {
+            service : undefined,
+            settings : undefined
+        };
+
+        this.setService = function(service){
+            this._obj.service = service;
+        };
+
+        this.setSettings = function(settings){
+            this._obj.settings = settings;
+        };
+
+        this.checkout = function(){
+            var provider = $injector.get('ngCart.fulfilment.' + this._obj.service);
+              return provider.checkout(this._obj.settings);
+
+        }
+
+    }])
+
+
+.service('ngCart.fulfilment.log', ['$q', '$log', 'ngCart', function($q, $log, ngCart){
+
+        this.checkout = function(){
+
+            var deferred = $q.defer();
+
+            $log.info(ngCart.toObject());
+            deferred.resolve({
+                cart:ngCart.toObject()
+            });
+
+            return deferred.promise;
+
+        }
+
+ }])
+
+.service('ngCart.fulfilment.http', ['$http', 'ngCart', function($http, ngCart){
+
+        this.checkout = function(settings){
+            return $http.post(settings.url,
+                { data: ngCart.toObject(), options: settings.options});
+        }
+ }])
+
+
+.service('ngCart.fulfilment.paypal', ['$http', 'ngCart', function($http, ngCart){
+
+
+}]);
