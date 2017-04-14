@@ -1,6 +1,6 @@
 var Foodapp = angular.module('FoodApp', ['ngRoute', 'ngResource', 'ngCart', 'ngDialog']);
 
-Foodapp.config(function($routeProvider){
+Foodapp.config(function($routeProvider, $locationProvider){
 	$routeProvider
 		//the timeline display
 		.when('/', {
@@ -42,6 +42,9 @@ Foodapp.config(function($routeProvider){
 		.otherwise({
             redirectTo: '/login'
         });
+
+        // use the HTML5 History API
+        //$locationProvider.html5Mode(true);
 
 });
 
