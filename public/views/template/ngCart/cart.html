@@ -22,21 +22,21 @@
             <td></td>
             <td></td>
             <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
-            <td>{{ ngCart.getTax() | currency }}</td>
+            <td>{{ ngCart.getTax() | currency:"EU€" }}</td>
         </tr>
         <tr ng-show="ngCart.getShipping()">
             <td></td>
             <td></td>
             <td></td>
             <td>Shipping:</td>
-            <td>{{ ngCart.getShipping() | currency }}</td>
+            <td>{{ ngCart.getShipping() | currency:"EU €" }}</td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
             <td>Total:</td>
-            <td>{{ ngCart.totalCost() | currency }}</td>
+            <td>{{ ngCart.totalCost() | currency:"EU €" }}</td>
         </tr>
         </tfoot>
         <tbody>
@@ -48,8 +48,8 @@
                       ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
                 {{ item.getQuantity() | number }}&nbsp;&nbsp;
                 <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
-            <td>{{ item.getPrice() | currency}}</td>
-            <td>{{ item.getTotal() | currency }}</td>
+            <td>{{ item.getPrice() | currency:"EU €"}}</td>
+            <td>{{ item.getTotal() | currency:"EU €" }}</td>
         </tr>
         </tbody>
     </table>

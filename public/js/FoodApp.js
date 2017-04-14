@@ -51,9 +51,6 @@ var Foodapp = angular.module('FoodApp');
 Foodapp.controller('mainController', ['$scope', '$http', '$location', '$routeParams', 'ngCart', 'ngDialog', function($scope, $http, $location, $routeParams, ngCart, ngDialog){
     console.log('mainController loaded...');
 
-
-
-
 function init() {
         $scope.newFooditem = {};
         $scope.clickedFooditem = {};
@@ -80,9 +77,6 @@ function init() {
     $scope.customer = customer;
 
     
-
-
-
 
     ngCart.setTaxRate(0.0);
     ngCart.setShipping(0.00);   
