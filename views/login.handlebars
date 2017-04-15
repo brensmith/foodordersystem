@@ -23,17 +23,17 @@
   <div class="thumbnail"><img src="../images/restaurant-menu.png"/></div>
   <form action="/users/register" method="post" class="register-form"> 
     <input name="name" type="text" placeholder="name"/>
-    <input name="username" type="text" placeholder="username"/>
-    <input name="email" type="email" placeholder="email address"/>
-    <input name="password" type="password" placeholder="password"/>
-    <input name="password2" type="password" placeholder="password"/>
+    <input name="username" type="text" placeholder="username" required="true"/>
+    <input name="email" type="email" placeholder="email address" required="true"/ >
+    <input name="password" type="password" placeholder="password" required="true"/>
+    <input name="password2" type="password" placeholder="password" required="true"/>
     <button type="submit" class="btn btn-default regbutton">Register</button>
     <p class="message">Already registered? <a href="/users/login">Sign In</a></p>
   </form>
 
   <form action="/users/login" method="post"  class="login-form">
-    <input name="username" type="text" placeholder="username"/>
-    <input name="password" type="password" placeholder="password"/>
+    <input name="username" type="text" placeholder="username" required="true" />
+    <input name="password" type="password" placeholder="password" required="true" />
     <button type="submit" class="btn btn-default regbutton">Login</button>
     <p class="message">Not registered? <a href="#">Create an account</a></p>
   </form>
