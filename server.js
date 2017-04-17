@@ -1,8 +1,8 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');// read cookies (needed for auth)
+var bodyParser = require('body-parser');// get information from html forms
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 //Connect-flash allows for passing session flashdata messages. 
@@ -17,11 +17,6 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var logger = require('morgan');
 var configDB = require('./config/database.js');
-
-//Connect mongoose to local mongo db
-//mongodb://localhost/olfos
-
-//connect to olfos mlab database mongodb://admin:root@ds151060.mlab.com:51060/olfos
  // connect to our database
 mongoose.connect(configDB.url);
 var db = mongoose.connection;
@@ -30,47 +25,36 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var staff = require('./routes/staff');
-
-
-
-
-
-
 // Init App
 var app = express();
-
+// log every request to the console
 app.use(logger('dev'));
-  
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
+// set up ejs handlebars templating
 app.engine('handlebars', exphbs({
-  defaultview: 'index1'
+  defaultview: 'index'
 }));
 app.set('view engine', 'handlebars');
-
 // BodyParser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'bower_components')));
-
-// Express Session
+// session secret
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true
 }));
-
 // Passport init
 app.use(passport.initialize());
-app.use(passport.session());
-
+app.use(passport.session());// persistent login sessions
 // Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -89,7 +73,7 @@ app.use(expressValidator({
   }
 }));
 
-// Connect Flash
+// use connect-flash for flash messages stored in session
 app.use(flash());
 
 // Global Vars

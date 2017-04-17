@@ -7,12 +7,12 @@ var User = require('../models/user');
 
 // Register
 router.get('/register', function(req, res) {
-	res.render('register');
+	res.render('register', { message: req.flash('RegisterMessage') });
 });
 
 // Login
 router.get('/login', function(req, res) {
-	res.render('login');
+	res.render('login', { message: req.flash('loginMessage') });
 });
 
 
@@ -57,6 +57,25 @@ router.post('/register', function(req, res) {
 	}
 });
 
+router.get('/profile', isLoggedIn, function(req, res) {
+        res.render('profile', {
+            user : req.user // get the user out of session and pass to template
+        });
+    });
+
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
+
 passport.use(new LocalStrategy(
 	function(username, password, done) {
 		User.getUserByUsername(username, function(err, user) {
@@ -99,6 +118,7 @@ router.post('/login',
 	}),
 	function(req, res) {
 		res.redirect('/' + req.user.username);
+		user : req.user
 	});
 
 router.get("/loggedin", function(req, res){

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org">
 <head>
@@ -17,10 +18,10 @@
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/ngcart.css" rel="stylesheet">
-    <link href="css/ngDialog-theme-default.min.css" rel="stylesheet">
-    <link href="css/ngDialog.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/ngcart.css" rel="stylesheet">
+    <link href="../css/ngDialog-theme-default.min.css" rel="stylesheet">
+    <link href="../css/ngDialog.min.css" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
     
@@ -30,12 +31,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
-    <script type= text/javascript src="js/ngCart.js"></script>
-    <script type= text/javascript src="js/ngCart.directives.js"></script>
-    <script type= text/javascript src="js/ngCart.fulfilment.js"></script>
-    <script type= text/javascript src="js/FoodApp.js"></script>
-
-    <script type= text/javascript src="/js/ngDialog.min.js"></script>
+    <script type= text/javascript src="../js/ngCart.js"></script>
+    <script type= text/javascript src="../js/ngCart.directives.js"></script>
+    <script type= text/javascript src="../js/ngCart.fulfilment.js"></script>
+    <script type= text/javascript src="../js/FoodApp.js"></script>
+    <script type= text/javascript src="../js/ngDialog.min.js"></script>
     
     <style type="text/css">
         .modal-dialog {
@@ -53,6 +53,10 @@
           padding: 15px;
           width: auto;
           margin-top: -5px;
+        }
+        .col-sm-6{
+            margin-left: 22%;
+            margin-top: 5%;
         }
     </style>
 
@@ -72,7 +76,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="/#/"><img src="images/foodban1.png" alt="Food Order System"></a>
+                      <a class="navbar-brand" href="/#/"><img src="../images/foodban1.png" alt="Food Order System"></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -110,7 +114,7 @@
     
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-4">
             {{#if success_msg}}
                 <div class="alert alert-success">{{success_msg}}</div>
             {{/if}}
@@ -125,22 +129,40 @@
         </div>
     </div>
 
-    <div class="col-sm-offset-2 col-md-8">
-        <div ng-view>
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- LOCAL INFORMATION -->
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span>{{user.name}}'s User Profile</h3>
+
+                        <p>
+                            
+                            <strong>name:</strong> {{user.name}}<br><br>
+                            <strong>username:</strong> {{user.username}}<br><br>
+                            <strong>email:</strong>{{user.email}}<br>
+                            
+                        </p>
+
+                </div>
+
+            </div>
+
         </div>
 
 
-            <!-- FOOTER -->
-              <footer>
-                <p>© 2017 Online Food Order System · <a href="/#/">Terms</a></p>
-              </footer>
+
     </div>
-</div> <!-- /container -->
-    
 
-    
-    
 
-    
+
+
+
+
 </body>
+
 </html>
+
