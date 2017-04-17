@@ -15,6 +15,11 @@
 <body>
   
 <div class="container">
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
   <div class="info">
     <h1>Online Food Ordering System</h1>
   </div>

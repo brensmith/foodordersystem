@@ -5,19 +5,25 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
+//Connect-flash allows for passing session flashdata messages. 
 var flash = require('connect-flash');
 var session = require('express-session');
-
 //load passport module
 var passport = require('passport');
 //load passport local module and create an instance of strategy
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
+//Mongoose is object modeling for our MongoDB database. 
 var mongoose = require('mongoose');
 var logger = require('morgan');
+var configDB = require('./config/database.js');
 
-//connect to olfos mlab database
-mongoose.connect('mongodb://admin:root@ds151060.mlab.com:51060/olfos');
+//Connect mongoose to local mongo db
+//mongodb://localhost/olfos
+
+//connect to olfos mlab database mongodb://admin:root@ds151060.mlab.com:51060/olfos
+ // connect to our database
+mongoose.connect(configDB.url);
 var db = mongoose.connection;
 // require files from route folder, no need for .js at the end of the file name
 var routes = require('./routes/index');

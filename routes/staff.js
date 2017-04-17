@@ -10,7 +10,7 @@ router.get('/', function(req, res){
 });
 
 // Get food menu
-router.get('/foodmenu', function(req, res){
+router.get('/api/foodmenu', function(req, res){
 	res.render('foodmenu');
 });
 

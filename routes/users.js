@@ -104,13 +104,16 @@ router.post('/login',
 router.get("/loggedin", function(req, res){
 	res.send(req.isAuthenticated() ? req.user : '0');
 });
-
+//logs user out of site, deleting them from the session, and returns to Login page
 router.get('/logout', function(req, res) {
+	var name = req.user.username;
+	console.log("LOGGIN OUT " + req.user.username)
 	req.logout();
 
 	req.flash('success_msg', 'You are logged out');
 
 	res.redirect('/users/login');
+	req.session.notice = "You have successfully been logged out " + name + "!";
 });
 
 module.exports = router;

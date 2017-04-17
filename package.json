@@ -23,6 +23,7 @@
     "gridfs": "^1.0.0",
     "mongodb": "*",
     "mongoose": "*",
+    "mongoose-unique-validator": "^1.0.5",
     "morgan": "*",
     "multer": "^1.3.0",
     "passport": "*",

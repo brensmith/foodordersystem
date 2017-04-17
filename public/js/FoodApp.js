@@ -15,7 +15,7 @@ Foodapp.config(function($routeProvider, $locationProvider){
     //the user profile display
     .when('/userprofile', {
       templateUrl: 'views/user/userprofile.html',
-      controller: 'userController',
+      controller: 'profileController',
       action: 'getUser'
     })
     //the user profile display
@@ -59,7 +59,7 @@ function init() {
         $scope.clickedFooditem = {};
         
 
-        $http.get("/fooditem").then(function(response) {
+        $http.get("/api/fooditem").then(function(response) {
             $scope.fooditems = response.data;
             console.log($scope.fooditems);
 
@@ -97,14 +97,14 @@ function init() {
 
     $scope.getFoodItembyid = function(){
         var id = $routeParams.id;
-        $http.get('/fooditem/'+id).success(function(response){
+        $http.get('/api/fooditem/'+id).success(function(response){
             $scope.fooditem = response;
         });
     };
 
     $scope.addFoodItem = function(){
         console.log($scope.book);
-        $http.post('/fooditem/', $scope.fooditem).success(function(response){
+        $http.post('/api/fooditem/', $scope.fooditem).success(function(response){
             console.log('addFoodItem');
             //window.location.href='#/books';
         });
@@ -112,14 +112,14 @@ function init() {
 
     $scope.updateFoodItem = function(){
         var id = $routeParams.id;
-        $http.put('/admin/fooditem/'+id, $scope.fooditem).success(function(response){
+        $http.put('/api/admin/fooditem/'+id, $scope.fooditem).success(function(response){
             console.log('updateFoodItem');
             //window.location.href='#/books';
         });
     };
 
     $scope.removeFoodItem = function(id){
-        $http.delete('/admin/fooditem/'+id).success(function(response){
+        $http.delete('/api/admin/fooditem/'+id).success(function(response){
             console.log('removeaddFoodItem');
             //window.location.href='#/books';
         });
@@ -172,7 +172,7 @@ Foodapp.controller('editmenuController', ['$scope', '$http', '$location', '$rout
         $scope.message = "";
 
     
-        $http.get('/fooditem').success(function(response){
+        $http.get('/api/fooditem').success(function(response){
           //console.log($scope.fooditem);
             $scope.fooditems = response;
             console.log($scope.fooditems);
@@ -184,7 +184,7 @@ Foodapp.controller('editmenuController', ['$scope', '$http', '$location', '$rout
     $scope.saveFooditem = function() {
         console.log($scope.newFooditem);
         $http({
-            url: '/fooditem/',
+            url: '/api/fooditem/',
             method: 'POST',
             data: $httpParamSerializerJQLike($scope.newFooditem),
             headers: {
@@ -208,7 +208,7 @@ Foodapp.controller('editmenuController', ['$scope', '$http', '$location', '$rout
 
     $scope.updateFooditem = function() {
         $http({
-            url: '/update/',
+            url: '/api/update/',
             method: 'POST',
             data: $httpParamSerializerJQLike($scope.clickedFooditem),
             headers: {
@@ -223,7 +223,7 @@ Foodapp.controller('editmenuController', ['$scope', '$http', '$location', '$rout
 
     $scope.deleteFooditem = function() {
         $http({
-            url: '/delete/',
+            url: '/api/delete/',
             method: 'POST',
             data: $httpParamSerializerJQLike({ '_id': $scope.clickedFooditem._id }),
             headers: {
@@ -248,7 +248,7 @@ Foodapp.controller('userController', ['$scope', '$http', '$location', '$routePar
 
 
     $scope.getUser = function(){
-        $http.get('/user').success(function(response){
+        $http.get('/api/user').success(function(response){
           //console.log($scope.fooditem);
           console.log($scope.users);
             $scope.users = response;
@@ -257,14 +257,14 @@ Foodapp.controller('userController', ['$scope', '$http', '$location', '$routePar
 
     $scope.getUserbyid = function(){
         var id = $routeParams.id;
-        $http.get('/user/'+id).success(function(response){
+        $http.get('/api/user/'+id).success(function(response){
             $scope.user = response;
         });
     };
 
     $scope.addUser = function(){
         console.log($scope.user);
-        $http.post('/user/', $scope.user).success(function(response){
+        $http.post('/api/user/', $scope.user).success(function(response){
             console.log('addUser');
             //window.location.href='#/books';
         });
@@ -272,20 +272,42 @@ Foodapp.controller('userController', ['$scope', '$http', '$location', '$routePar
 
     $scope.updateUser = function(){
         var id = $routeParams.id;
-        $http.put('/user/'+id, $scope.user).success(function(response){
+        $http.put('/api/user/'+id, $scope.user).success(function(response){
             console.log('updateUser');
             //window.location.href='#/books';
         });
     };
 
     $scope.removeFoodItem = function(id){
-        $http.delete('/user/'+id).success(function(response){
+        $http.delete('/api/user/'+id).success(function(response){
             console.log('removeaddFoodItem');
             //window.location.href='#/books';
         });
     };
 
     $scope.getUser();
+}]);
+
+
+
+Foodapp.controller('profileController', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams){
+    console.log('profileController loaded...');
+
+
+    function profileCtrl($location) {
+  var vm = this;
+
+  vm.user = {};
+
+  $scope.getProfile()
+    .success(function(data) {
+      vm.user = data;
+    })
+    .error(function (e) {
+      console.log(e);
+    });
+}
+
 }]);
 
 

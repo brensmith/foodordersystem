@@ -7,7 +7,7 @@ var User = require('../models/user');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index1');
+	res.render('index');
 });
 
 
@@ -23,7 +23,7 @@ function ensureAuthenticated(req, res, next){
 }
 
 // Get food item objects from database
-router.get('/fooditem', function(req, res){
+router.get('/api/fooditem',ensureAuthenticated, function(req, res){
     console.log('GET all food');
     Fooditem.find({})
         .exec(function(err, fooditem){
@@ -39,7 +39,7 @@ router.get('/fooditem', function(req, res){
 });
 
 // Find one food object from database
-router.get('/fooditem/:id', function(req, res){
+router.get('/api/fooditem/:id', function(req, res){
     console.log('GET one food');
     Fooditem.findOne({_id: req.params.id})
         .exec(function(err, fooditem){
@@ -54,7 +54,7 @@ router.get('/fooditem/:id', function(req, res){
 });
 
 // Add food Item object to database
-router.post('/fooditem', function(req, res){
+router.post('/api/fooditem',ensureAuthenticated, function(req, res){
     var newFoodItem = new Fooditem();
 
     newFoodItem.name = req.body.name;
@@ -74,7 +74,7 @@ router.post('/fooditem', function(req, res){
 });
 
 // Add food Item2 object to database
-router.post('/fooditem2', function(req, res){
+router.post('/api/fooditem2', function(req, res){
     Fooditem.create(req.body,function(err, fooditem){
         if(err){
             res.send('error saving meal');
@@ -89,7 +89,7 @@ router.post('/fooditem2', function(req, res){
 });
 
 // Update food Item object to database
-router.put('/fooditem/:id', function(req, res){
+router.put('/api/fooditem/:id',ensureAuthenticated, function(req, res){
     Fooditem.findOneAndUpdate({_id: req.params.id},
         {$set:{name: req.body.name,
             description: req.body.description,
@@ -110,7 +110,7 @@ router.put('/fooditem/:id', function(req, res){
         });
 });
 
-router.delete('/fooditem/:id', function(req, res){
+router.delete('/api/fooditem/:id', function(req, res){
     Fooditem.findOneAndRemove({
         _id:req.params.id
     },function(err,Fooditem){
@@ -123,7 +123,7 @@ router.delete('/fooditem/:id', function(req, res){
     });
 });
 
-router.post('/delete', function(req, res) {
+router.post('/api/delete', function(req, res) {
     var condition = req.body;
     Fooditem.remove(condition, function (err, message) {
         if (err) {
@@ -135,7 +135,7 @@ router.post('/delete', function(req, res) {
 
 });
 
-router.post('/update', function(req, res) {
+router.post('/api/update', function(req, res) {
     var data = req.body;
     delete data.$$hashKey;
 
@@ -150,8 +150,8 @@ router.post('/update', function(req, res) {
 });
 
 
-// Get food item objects from database
-router.get('/users', function(req, res){
+// Get user object from database
+router.get('/api/users',ensureAuthenticated, function(req, res){
     console.log('GET all users');
     User.find({})
         .exec(function(err, user){

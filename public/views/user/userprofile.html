@@ -1,19 +1,13 @@
 <h2 class="page-header">My Profile</h2>
 
 
-
-
-<table class="table table-responsive table-striped header-fixed">
-            <thead>
-                <tr><!-- Table headings -->
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}.</td>
-                    <td>
-
-                    <p>{{ currentUser.username }}</p>
+<form class="form-horizontal float-left">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Full name</label>
+    <p class="form-control-static">{{vm.name }}</p>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Email</label>
+    <p class="form-control-static">{{vm.email }}</p>
+  </div>
+</form>
