@@ -15,32 +15,26 @@
 <body>
   
 <div class="container">
-{{#if errors}}
+
+  <div class="info">
+    <h1>Online Food Ordering System</h1>
+  </div>
+  {{#if errors}}
       {{#each errors}}
         <div class="alert alert-danger">{{msg}}</div>
       {{/each}}
 {{/if}}
-  <div class="info">
-    <h1>Online Food Ordering System</h1>
-  </div>
 </div>
 <div class="form">
-  <div class="thumbnail"><img src="../images/restaurant-menu.png"/></div>
-  <form action="/users/register" method="post" class="register-form"> 
-    <input name="name" type="text" placeholder="name"/>
-    <input name="username" type="text" placeholder="username" required="true"/>
-    <input name="email" type="email" placeholder="email address" required="true"/ >
-    <input name="password" type="password" placeholder="password" required="true"/>
-    <input name="password2" type="password" placeholder="password" required="true"/>
-    <button type="submit" class="btn btn-default regbutton">Register</button>
-    <p class="message">Already registered? <a href="/users/login">Sign In</a></p>
-  </form>
+  
 
+  <div class="thumbnail"><img src="../images/restaurant-menu.png"/></div>
   <form action="/users/login" method="post"  class="login-form">
+
     <input name="username" type="text" placeholder="username" required="true" />
     <input name="password" type="password" placeholder="password" required="true" />
     <button type="submit" class="btn btn-default regbutton">Login</button>
-    <p class="message">Not registered? <a href="#">Create an account</a></p>
+    <p class="message">Not registered? <a href="/users/register">Create an account</a></p>
   </form>
 </div>
 

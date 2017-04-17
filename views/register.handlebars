@@ -85,15 +85,16 @@ right: 50%;
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <div class="container-fluid">
 
-{{#if errors}}
-      {{#each errors}}
-        <div class="alert alert-danger">{{msg}}</div>
-      {{/each}}
-{{/if}}
+
 
    <form action="/users/register" method="post" class="register-form"> 
 
       <div class="row">      
+      {{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
            <div class="col-md-4 col-sm-4 col-lg-4">
               <label for="Name">name</label>
                <input name="name" class="form-control" placeholder="Name" type="text">    
