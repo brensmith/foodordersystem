@@ -7,8 +7,19 @@ var User = require('../models/user');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
-});
+    var userRole = req.user ? req.user.role : 'anon';
+if (req.user.role ==='ADMIN')
+  res.render('staff', {
+    role: userRole
+  });
+else{
+    if (req.user.role ==='USER')
+  res.render('index', {
+    role: userRole
+  });
+}
+})
+	
 
 
 function ensureAuthenticated(req, res, next){
