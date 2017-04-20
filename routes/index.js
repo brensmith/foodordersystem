@@ -4,6 +4,7 @@ var router = express.Router();
 //Required Models --> This gives us access to these
 var Fooditem = require('../models/fooditem');
 var User = require('../models/user');
+var Checkeditem = require('../models/checkeditem');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
@@ -83,6 +84,44 @@ router.post('/api/fooditem',ensureAuthenticated, function(req, res){
         }
     });
 });
+
+
+// Add food Item object to database
+router.post('/api/checkeditem',ensureAuthenticated, function(req, res){
+    var newCheckeditem = new Checkeditem();
+
+    newCheckeditem.name = req.body.name;
+    newCheckeditem.price = req.body.price;
+    newCheckeditem.quantity = req.body.quantity;
+    
+
+    newCheckeditem.save(function(err,Checkeditem){
+        if(err){
+            res.send('Error saving Checked Item');
+        }else{
+            console.log(Checkeditem);
+            res.send(Checkeditem);
+        }
+    });
+});
+
+// Get food item objects from database
+router.get('/api/checkeditem',ensureAuthenticated, function(req, res){
+    console.log('GET all checkeditem');
+    Checkeditem.find({})
+        .exec(function(err, checkeditem){
+            if(err){
+                res.send('An error has occured');
+            }   else{
+                console.log(checkeditem);
+                //req.json(Fooditem); //returns the data in json format
+                res.send(checkeditem);
+            }
+        });
+
+});
+
+
 
 // Add food Item2 object to database
 router.post('/api/fooditem2', function(req, res){

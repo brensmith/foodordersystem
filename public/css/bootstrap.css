@@ -6689,6 +6689,15 @@ button.close {
     display: inline-block !important;
   }
 }
+
+
+@media (max-width: 480px) { /* 640 for example */
+    .li {
+        display : none;
+    }
+}
+
+
 @media (max-width: 767px) {
   .hidden-xs {
     display: none !important;

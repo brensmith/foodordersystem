@@ -54,6 +54,20 @@
           width: auto;
           margin-top: -5px;
         }
+        
+
+@media only screen and (max-width: 500px) {
+    li.myli {
+    visibility: hidden;
+}
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+}
     </style>
 
     <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
@@ -92,7 +106,7 @@
                                     </ul>
                                 </li>
                             <ul class="nav navbar-nav navbar-right">
-                                    <li><a a href="/#/cart" style="padding: 5px 0 0 0; margin-right: 15px; width:150px"><ngcart-summary></ngcart-summary></a>
+                                    <li class="myli"><a a href="/#/cart" style="padding: 5px 0 0 0; margin-right: 15px; width:150px"><ngcart-summary></ngcart-summary></a>
                                     </li>
                             </ul>
                             <li role="presentation"><a href="/users/logout">Logout</a></li>
