@@ -4,16 +4,18 @@ var router = express.Router();
 //Required Models --> This gives us access to these
 var Fooditem = require('../models/fooditem');
 var User = require('../models/user');
-var Checkeditem = require('../models/checkeditem');
+var Checkeditem = require('../models/purchaseditem');
 
-// Get Homepage
+// Get Homepage and check is user authenticated, if not authenticated render login view
 router.get('/', ensureAuthenticated, function(req, res){
+    //if authenticated user role is === to "ADMIN" load the staff dashboard
     var userRole = req.user ? req.user.role : 'anon';
 if (req.user.role ==='ADMIN')
   res.render('staff', {
     role: userRole
   });
 else{
+    //if authenicated user role === to "USER" load the user dashboard
     if (req.user.role ==='USER')
   res.render('index', {
     role: userRole
@@ -22,7 +24,7 @@ else{
 })
 	
 
-
+//check is user authenticated, if not than display message "you are not logged in" and render login view
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -86,36 +88,36 @@ router.post('/api/fooditem',ensureAuthenticated, function(req, res){
 });
 
 
-// Add food Item object to database
-router.post('/api/checkeditem',ensureAuthenticated, function(req, res){
-    var newCheckeditem = new Checkeditem();
+// Add purchased Item object to database
+router.post('/api/purchaseditem',ensureAuthenticated, function(req, res){
+    var newPurchaseditem = new Purchaseditem();
 
-    newCheckeditem.name = req.body.name;
-    newCheckeditem.price = req.body.price;
-    newCheckeditem.quantity = req.body.quantity;
+    newPurchaseditem.name = req.body.name;
+    newPurchaseditem.price = req.body.price;
+    newPurchaseditem.quantity = req.body.quantity;
     
 
-    newCheckeditem.save(function(err,Checkeditem){
+    newPurchaseditem.save(function(err,Purchaseditem){
         if(err){
             res.send('Error saving Checked Item');
         }else{
-            console.log(Checkeditem);
-            res.send(Checkeditem);
+            console.log(Purchaseditem);
+            res.send(Purchaseditem);
         }
     });
 });
 
-// Get food item objects from database
-router.get('/api/checkeditem',ensureAuthenticated, function(req, res){
-    console.log('GET all checkeditem');
-    Checkeditem.find({})
-        .exec(function(err, checkeditem){
+// Get purchased item objects from database
+router.get('/api/purchaseditem',ensureAuthenticated, function(req, res){
+    console.log('GET all Purchased items');
+    Purchaseditem.find({})
+        .exec(function(err, purchaseditem){
             if(err){
                 res.send('An error has occured');
             }   else{
-                console.log(checkeditem);
-                //req.json(Fooditem); //returns the data in json format
-                res.send(checkeditem);
+                console.log(purchaseditem);
+                //req.json(purchaseditem); //returns the data in json format
+                res.send(purchaseditem);
             }
         });
 

@@ -23,8 +23,6 @@ var db = mongoose.connection;
 // require files from route folder, no need for .js at the end of the file name
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var admin = require('./routes/admin');
-var staff = require('./routes/staff');
 // Init App
 var app = express();
 // log every request to the console
@@ -87,9 +85,6 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/admin', admin);
-app.use('/staff', staff);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -108,7 +103,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
