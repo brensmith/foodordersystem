@@ -2,14 +2,14 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Forgot</title>
+  <title>Reset</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-      <link href="../css/style1.css" rel="stylesheet">
+      <link href="/css/style1.css" rel="stylesheet">
 
 
 <style type="text/css">
@@ -48,14 +48,20 @@
 <div class="form">
   
 
-  <div class="thumbnail"><img src="../images/restaurant-menu.png"/></div>
-  <form action="/users/forgot" method="post"  class="login-form">
-
-    <input name="email" type="text" placeholder="email" required="true" />
-    
-    <button type="submit" class="btn btn-default regbutton">Send</button>
-    
-  </form>
+  <div class="thumbnail"><img src="/images/restaurant-menu.png"/></div>
+  <form method="post" class="login-form">
+  <legend>Reset Password</legend>
+  <hr>
+  <div class="form-group">
+    <input type="password" name="password" type="text" value="" placeholder="New password" autofocus="autofocus" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <input type="password" name="confirm" type="text" value="" placeholder="Confirm password" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Update Password</button>
+  </div>
+</form>
 </div>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

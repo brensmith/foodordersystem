@@ -107,7 +107,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('<h2>server error please try again later...</h2>');
+  res.send('server error please try again ');
 });
 
 // Set Port
