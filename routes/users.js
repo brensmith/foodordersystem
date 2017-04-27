@@ -40,39 +40,35 @@ router.post('/forgot', function(req, res, next) {
       User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
           req.flash('error', 'No account with that email address exists.');
-          return res.redirect('/users/forgot');
+          return res.redirect('/forgot');
         }
 
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-        user.save(function(err) {
+        User.save(function(err) {
           done(err, token, user);
         });
       });
     },
     function(token, user, done) {
-
-    	var options = {
-  				auth: {
-    			api_user: 'foodordersystem',
-    			api_key: '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'
-  			}
-		}
-
-      //var smtpTransport = nodemailer.createTransport(sgTransport(options));
-        
-      
+      var smtpTransport = nodemailer.createTransport('SMTP', {
+        service: 'SendGrid',
+        auth: {
+          user: 'apikey',
+          pass: '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'
+        }
+      });
       var mailOptions = {
         to: user.email,
-        from: 'technolounge@hotmail.com',
+        from: 'passwordreset@demo.com',
         subject: 'Node.js Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
-      client.sendMail(mailOptions, function(err) {
+      smtpTransport.sendMail(mailOptions, function(err) {
         req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
         done(err, 'done');
       });
