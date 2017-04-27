@@ -1,1 +1,0 @@
-<ngcart-addtocart template-url="/ngCart/template/ngCart/addtocart.html" id="{{ item.id }}" name="{{ item.name }}" price="{{ item.price }}" quantity="1" quantity-max="30" data="item"></ngcart-addtocart>

@@ -10,6 +10,7 @@
   "author": "Brendan Smith",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.3.0",
     "bcryptjs": "*",
     "body-parser": "*",
     "compress": "^0.99.0",
@@ -27,6 +28,8 @@
     "morgan": "*",
     "multer": "^1.3.0",
     "ng-file-upload": "^12.2.13",
+    "nodemailer": "^4.0.1",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*"

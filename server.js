@@ -5,6 +5,10 @@ var cookieParser = require('cookie-parser');// read cookies (needed for auth)
 var bodyParser = require('body-parser');// get information from html forms
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
+var nodemailer = require('nodemailer');
+var async = require('async');
+var crypto = require('crypto');
+var sgTransport = require('nodemailer-sendgrid-transport');
 //Connect-flash allows for passing session flashdata messages. 
 var flash = require('connect-flash');
 var session = require('express-session');
@@ -86,6 +90,8 @@ app.use(function(req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -101,7 +107,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('<h2>server error please try again later...</h2>');
 });
 
 // Set Port
