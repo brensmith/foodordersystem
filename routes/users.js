@@ -22,7 +22,7 @@ router.get('/forgot', function(req, res) {
 var client = nodemailer.createTransport({
   service: 'SendGrid',
   auth: {
-    user: 'foodordersystem',
+    user: 'apikey',
     pass: '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'
   }
 });
