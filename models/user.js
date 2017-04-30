@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-
+var User = require('../models/user');
 // User Schema
 var UserSchema = mongoose.Schema({
 	username: {
@@ -20,7 +20,8 @@ var UserSchema = mongoose.Schema({
 		type: String, enum: ['USER', 'ADMIN'], default: 'USER'
 	},
 	resetPasswordToken: String,
-  	resetPasswordExpires: Date
+  	resetPasswordExpires: Date,
+  	items: {type: mongoose.Schema.Types.ObjectId, ref: 'Fooditem'},
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

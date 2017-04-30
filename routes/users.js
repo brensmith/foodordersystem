@@ -7,7 +7,7 @@ var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
 var async = require('async');
 var crypto = require('crypto');
-
+// require the user model
 var User = require('../models/user');
 
 // Register
@@ -84,8 +84,6 @@ router.get('/reset/:token', function(req, res) {
   });
 });
 
-
-
 router.post('/reset/:token', function(req, res) {
   async.waterfall([
     function(done) {
@@ -130,8 +128,6 @@ router.post('/reset/:token', function(req, res) {
     res.redirect('/');
   });
 });
-
-
 
 // Login
 router.get('/login', function(req, res) {
@@ -185,7 +181,6 @@ router.get('/profile', isLoggedIn, function(req, res) {
         });
     });
 
-
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
@@ -196,7 +191,6 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-
 
 passport.use(new LocalStrategy(
 	function(username, password, done) {

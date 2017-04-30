@@ -1,10 +1,33 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer');
 
 //Required Models --> This gives us access to these
 var Fooditem = require('../models/fooditem');
 var User = require('../models/user');
 var Checkeditem = require('../models/purchaseditem');
+//set image upload to save to disk
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
+
+var upload = multer({storage: storage}).single('foodimage');
+
+router.post('/uploads', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      // An error occurred when uploading
+        res.send('An error has occured Image not uploaded');
+        }
+     // Everything went fine
+    res.json({success: true, message: 'Image Uploaded'});
+  })
+});
 
 // Get Homepage and check is user authenticated, if not authenticated render login view
 router.get('/', ensureAuthenticated, function(req, res){
@@ -22,6 +45,10 @@ else{
   });
 }
 })
+
+router.get('/checkout', function(req, res) {
+  res.render('checkout', {user: req.user});
+});
 	
 
 //check is user authenticated, if not than display message "you are not logged in" and render login view
@@ -36,7 +63,7 @@ function ensureAuthenticated(req, res, next){
 	}
 }
 
-// Get food item objects from database
+// Get food item objects from database, check first if user making the request is authenticated
 router.get('/api/fooditem',ensureAuthenticated, function(req, res){
     console.log('GET all food');
     Fooditem.find({})
@@ -67,7 +94,7 @@ router.get('/api/fooditem/:id', function(req, res){
 
 });
 
-// Add food Item object to database
+// Add food Item object to database, check first if user is authenticated
 router.post('/api/fooditem',ensureAuthenticated, function(req, res){
     var newFoodItem = new Fooditem();
 
@@ -174,6 +201,7 @@ router.delete('/api/fooditem/:id', function(req, res){
         }
     });
 });
+
 
 router.post('/api/delete', function(req, res) {
     var condition = req.body;

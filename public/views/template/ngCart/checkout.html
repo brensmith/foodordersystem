@@ -1,8 +1,8 @@
-<!--
+
 <div ng-if="service=='http' || service == 'log'">
     <button class="btn btn-primary" ng-click="checkout()" ng-disabled="!ngCart.getTotalItems()" ng-transclude>Checkout</button>
 </div>
--->
+
 <div ng-if="service=='paypal'">
 
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-show="ngCart.getTotalItems()">

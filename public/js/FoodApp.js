@@ -141,16 +141,12 @@ Foodapp.config(function($routeProvider, $locationProvider){
             });
         };
 
-
-
-
-
             $scope.httpSettings = {
-                url:'views/template/ngCart/checkout.html'
+                url:'/#/checkout'
             };
 
             $scope.payPalSettings ={ paypal:{
-                business:'dan@snapjay.com',
+                business:'medicinalrecordings@hotmail.com',
                 item_name:'Order',
                 item_number:'item_number',
                 currency_code:'CAD'

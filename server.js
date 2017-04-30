@@ -20,6 +20,7 @@ var mongo = require('mongodb');
 //Mongoose is object modeling for our MongoDB database. 
 var mongoose = require('mongoose');
 var logger = require('morgan');
+var multer = require('multer');
 var configDB = require('./config/database.js');
  // connect to our database
 mongoose.connect(configDB.url);
@@ -48,6 +49,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'bower_components')));
+
 // session secret
 app.use(session({
   secret: 'secret',
@@ -89,8 +91,6 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

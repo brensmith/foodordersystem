@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = require('../models/user');
 
 // FoodMenu Schema
 var FoodItemSchema = mongoose.Schema({
@@ -18,7 +19,8 @@ var FoodItemSchema = mongoose.Schema({
 	},
 	img_url: {
 		type: String
-	}
+	},
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 });
 
 const Fooditem = module.exports = mongoose.model('Fooditem', FoodItemSchema);
