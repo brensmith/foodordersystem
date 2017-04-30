@@ -9,6 +9,7 @@ var async = require('async');
 var crypto = require('crypto');
 // require the user model
 var User = require('../models/user');
+var configGrid = require('../config/sendGrid.js');
 
 // Register
 router.get('/register', function(req, res) {
@@ -43,13 +44,8 @@ router.post('/forgot', function(req, res, next) {
       });
     },
     function(token, user, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-          user: 'apikey',
-          pass: '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'
-        }
-      });
+      var smtpTransport = nodemailer.createTransport(configGrid.service
+      );
       var mailOptions = {
         to: user.email,
         from: 'passwordreset@foodordersystem.com',
@@ -105,13 +101,7 @@ router.post('/reset/:token', function(req, res) {
       });
     },
     function(user, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-          user: 'apikey',
-          pass: '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'
-        }
-      });
+      var smtpTransport = nodemailer.createTransport(configGrid.service);
       var mailOptions = {
         to: user.email,
         from: 'passwordreset@foodordersystem.com',
