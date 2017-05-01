@@ -3,6 +3,7 @@ npm-debug.log
 .DS_Store
 /*.env
 /bower_components
-
+sendGrid.js
+database.js
 
 
