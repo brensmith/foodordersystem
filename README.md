@@ -17,5 +17,5 @@ $ npm install
 ```
 
 ```shell
-$ node app
+$ node server
 ```
